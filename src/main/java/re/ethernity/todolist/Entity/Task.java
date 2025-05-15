@@ -1,33 +1,28 @@
 package re.ethernity.todolist.Entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+import java.util.List;
 
 @Entity
-@Table(name="Task")
+@Table(name = "task")
 public class Task {
+
     @Id
     @GeneratedValue
     private Long id;
-    private String Name;
 
-    public String getDescription() {
-        return Description;
-    }
+    private String name;
+    private String description;
 
-    public void setDescription(String description) {
-        Description = description;
-    }
+    @ManyToMany
+    @JoinTable(
+            name = "task_categories",
+            joinColumns = @JoinColumn(name = "task_id"),
+            inverseJoinColumns = @JoinColumn(name = "category_id")
+    )
+    private List<Categories> categories;
 
-    public String getName() {
-        return Name;
-    }
-
-    public void setName(String name) {
-        Name = name;
-    }
+    // Getters & Setters
 
     public Long getId() {
         return id;
@@ -37,5 +32,27 @@ public class Task {
         this.id = id;
     }
 
-    private String Description;
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public List<Categories> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(List<Categories> categories) {
+        this.categories = categories;
+    }
 }
