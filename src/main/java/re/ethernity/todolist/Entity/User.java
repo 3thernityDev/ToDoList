@@ -3,56 +3,69 @@ package re.ethernity.todolist.Entity;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name="Utilisateur")
+@Table(name = "utilisateur")
 public class User {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long Id;
-    private String Name;
+    private Long id;
 
-    public Long getId() {
-        return Id;
-    }
+    private String name;
+    private String password;
+    private String email;
 
-    public void setId(Long id) {
-        Id = id;
-    }
-
-    public String getName() {
-        return Name;
-    }
-
-    public void setName(String name) {
-        Name = name;
-    }
-
-    public String getPassword() {
-        return Password;
-    }
-
-    public void setPassword(String password) {
-        Password = password;
-    }
-
-    public String getEmail() {
-        return Email;
-    }
-
-    public void setEmail(String email) {
-        Email = email;
-    }
-
-    private String Password;
-    private String Email;
+    @ManyToOne
+    @JoinColumn(name = "service_id")
+    private Service service;
 
     public User() {
-
     }
 
     public User(String name, String password, String email) {
-        this.Name = name;
-        this.Password = password;
-        this.Email = email;
+        this.name = name;
+        this.password = password;
+        this.email = email;
     }
 
+    // Getters & Setters
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public Service getService() {
+        return service;
+    }
+
+    public void setService(Service service) {
+        this.service = service;
+    }
 }
