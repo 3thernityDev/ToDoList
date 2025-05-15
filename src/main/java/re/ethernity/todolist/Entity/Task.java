@@ -5,7 +5,9 @@ import java.util.List;
 
 @Entity
 @Table(name = "task")
-public class Task {
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "task_type", discriminatorType = DiscriminatorType.STRING)
+public abstract class Task {
 
     @Id
     @GeneratedValue
@@ -21,6 +23,10 @@ public class Task {
             inverseJoinColumns = @JoinColumn(name = "category_id")
     )
     private List<Categories> categories;
+
+    @ManyToOne
+    @JoinColumn(name = "priority_id")
+    private Priority priority;
 
     // Getters & Setters
 
@@ -54,5 +60,13 @@ public class Task {
 
     public void setCategories(List<Categories> categories) {
         this.categories = categories;
+    }
+
+    public Priority getPriority() {
+        return priority;
+    }
+
+    public void setPriority(Priority priority) {
+        this.priority = priority;
     }
 }
