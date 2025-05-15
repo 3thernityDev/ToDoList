@@ -1,5 +1,6 @@
 package re.ethernity.todolist.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import java.util.List;
 
@@ -14,6 +15,7 @@ public class Service {
     private String name;
 
     @OneToMany(mappedBy = "service")
+    @JsonIgnore
     private List<User> users;
 
     // Getters & Setters
