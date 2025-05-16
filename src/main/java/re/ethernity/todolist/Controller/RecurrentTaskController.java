@@ -6,6 +6,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import re.ethernity.todolist.Entity.RecurrentTask;
 import re.ethernity.todolist.repository.RecurrentTaskRepository;
+import re.ethernity.todolist.Entity.Task;
+
 
 import java.util.List;
 import java.util.Optional;
@@ -32,6 +34,13 @@ public class RecurrentTaskController {
                     .body("Cette tâche récurrente n'a pas été trouvée. ID -> " + id);
         }
     }
+
+    @GetMapping("/status/{status}")
+    public List<RecurrentTask> getByStatus(@PathVariable Task.Status status) {
+        return recurrentTaskRepository.findByStatus(status);
+    }
+
+
 
     @PostMapping("/")
     public RecurrentTask save(@RequestBody RecurrentTask recurrentTask) {

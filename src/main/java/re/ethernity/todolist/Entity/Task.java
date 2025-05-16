@@ -17,6 +17,25 @@ public abstract class Task {
     private String name;
     private String description;
 
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private Status status = Status.IN_PROGRESS;
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
+    }
+
+    public enum Status {
+        IN_PROGRESS,
+        COMPLETED,
+        FAILED,
+        WAITING_APPROVAL,
+    }
+
     @ManyToMany
     @JoinTable(
             name = "task_categories",
