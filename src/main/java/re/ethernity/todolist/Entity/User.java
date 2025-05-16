@@ -2,6 +2,8 @@ package re.ethernity.todolist.Entity;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "utilisateur")
 public class User {
@@ -17,6 +19,9 @@ public class User {
     @ManyToOne
     @JoinColumn(name = "service_id")
     private Service service;
+
+    @ManyToMany(mappedBy = "users")
+    private List<Task> tasks;
 
     public User() {
     }

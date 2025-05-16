@@ -29,7 +29,21 @@ public abstract class Task {
     @JoinColumn(name = "priority_id")
     private Priority priority;
 
-    // Getters & Setters
+    public List<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(List<User> users) {
+        this.users = users;
+    }
+
+    @ManyToMany
+    @JoinTable(
+            name = "user_task",
+            joinColumns = @JoinColumn(name = "task_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id")
+    )
+    private List<User> users;
 
     public Long getId() {
         return id;
